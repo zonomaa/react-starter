@@ -1,11 +1,12 @@
-const path = require('path')
-const webpack = require('webpack')
-const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
+/* eslint-disable @typescript-eslint/no-var-requires */
+const path = require('path');
+const webpack = require('webpack');
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
 
-const MODE = process.env.NODE_ENV
-const smp = new SpeedMeasurePlugin()
+const MODE = process.env.NODE_ENV;
+const smp = new SpeedMeasurePlugin();
 
-const enabledSourceMap = MODE === 'dev'
+const enabledSourceMap = MODE === 'dev';
 
 module.exports = smp.wrap({
   entry: path.resolve(__dirname, 'src/main.tsx'),
@@ -23,7 +24,7 @@ module.exports = smp.wrap({
       },
       {
         test: /\.(ts|tsx)$/,
-        use: 'ts-loader',
+        use: ['babel-loader', 'ts-loader'],
       },
       {
         test: /\.(js|jsx)$/,
@@ -60,7 +61,10 @@ module.exports = smp.wrap({
       },
     ],
   },
-  resolve: { extensions: ['.ts', '.tsx', '.js', '.json'] },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.json'],
+    modules: ['node_modules', path.resolve(__dirname, './src')],
+  },
   output: {
     path: path.resolve(__dirname, 'dist/'),
     publicPath: '/dist/',
@@ -71,4 +75,4 @@ module.exports = smp.wrap({
     port: 3000,
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
-})
+});

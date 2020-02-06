@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --env=prod",
     "dev": "webpack-dev-server --open --hot --env=dev",
-    "storybook": "start-storybook",
+    "storybook": "start-storybook -c ./src/.storybook -s ./src",
     "test": "jest"
   },
   "author": "",
@@ -22,6 +22,7 @@
     "@typescript-eslint/eslint-plugin": "^2.19.0",
     "@typescript-eslint/parser": "^2.19.0",
     "babel-loader": "^8.0.6",
+    "babel-plugin-emotion": "^10.0.27",
     "css-loader": "^3.4.2",
     "eslint": "^6.8.0",
     "eslint-config-google": "^0.14.0",
